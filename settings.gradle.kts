@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Franki Weather"
 include(":app")
+include(":app:data")
