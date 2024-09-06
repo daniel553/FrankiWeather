@@ -10,8 +10,8 @@ data class WeatherEntity(
     @PrimaryKey
     val id: Long,
     val cod: Int,
-    val message: String? = "",
-    val name: String? = "",
+    val message: String = "",
+    val name: String = "",
     val weather: List<WeatherEntityItem>? = null,
     @Embedded
     val main: WeatherEntityMain? = null
