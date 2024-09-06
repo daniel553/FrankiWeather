@@ -6,4 +6,7 @@
     <string name="add_city_not_found">City not found, try again</string>
     <string name="add_city_saved">City added succesfully!</string>
     <string name="add_city_not_saved">Error adding this city, try again!</string>
+    <string name="add_city_hint">Search for a city</string>
+    <string name="add_city_popular_cities">Popular cities</string>
+    <string name="add_city_tap_to_search">Tap to autocomplete</string>
 </resources>

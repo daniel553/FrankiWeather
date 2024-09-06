@@ -7,4 +7,5 @@ data class AddCityState(
     val searching: Boolean = false,
     val city: WeatherCity? = null,
     val error: AddCityErrorMessages? = null,
+    val suggestions: List<String> = emptyList()
 )
