@@ -57,7 +57,7 @@ fun WeatherHomeView(
         WeatherHomeState.Loading -> WeatherHomeLoadingView(modifier)
         is WeatherHomeState.Success -> WeatherHomeListView(
             list = state.cities,
-            modifier = modifier,
+            modifier = Modifier,
             onEvent = { onEvent(it) }
         )
     }
@@ -96,8 +96,9 @@ fun WeatherHomeListView(
     if (list.isEmpty()) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = modifier
+            modifier = modifier.fillMaxWidth()
         ) {
+            Spacer(modifier = Modifier.height(32.dp))
             Icon(
                 imageVector = Icons.Outlined.Search,
                 contentDescription = "search",
@@ -110,7 +111,7 @@ fun WeatherHomeListView(
             Spacer(modifier = Modifier.height(8.dp))
             AddCityButtonView(
                 onClick = { onEvent(WeatherHomeEvent.OnAddNew) },
-                modifier.widthIn(128.dp)
+                modifier = Modifier.widthIn(128.dp).height(32.dp)
             )
         }
     } else {
@@ -137,7 +138,7 @@ fun WeatherHomeListView(
     }
 }
 
-@Preview(widthDp = 420)
+@Preview(widthDp = 420, heightDp = 300)
 @Composable
 private fun PreviewWeatherHomeListEmptyView() {
     FrankiWeatherTheme {
