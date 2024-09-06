@@ -25,6 +25,7 @@ object WeatherModule {
         retrofit.create(WeatherService::class.java)
 }
 
+@Module
 @InstallIn(SingletonComponent::class)
 abstract class WeatherModuleBinder {
     @Binds
