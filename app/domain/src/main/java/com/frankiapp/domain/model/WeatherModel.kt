@@ -52,3 +52,26 @@ private fun WeatherEntityMain.asWeatherMainModel(): WeatherMainModel = WeatherMa
     tempMin = this.tempMin,
     tempMax = this.tempMax,
 )
+
+//Reverse
+
+fun WeatherModel.asWeatherEntity(): WeatherEntity = WeatherEntity(
+    id,
+    cod,
+    message,
+    name,
+    weather = weather.asListWeatherItemModel(),
+    main = main.asWeatherEntityMain()
+)
+
+private fun List<WeatherItemModel>.asListWeatherItemModel(): List<WeatherEntityItem> = this.map {
+    it.asWeatherItemEntity()
+}
+
+fun WeatherItemModel.asWeatherItemEntity(): WeatherEntityItem = WeatherEntityItem(
+    id, main, description, icon
+)
+
+fun WeatherMainModel.asWeatherEntityMain(): WeatherEntityMain = WeatherEntityMain(
+    temp, tempMin, tempMax
+)

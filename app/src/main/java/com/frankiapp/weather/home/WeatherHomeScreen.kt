@@ -31,7 +31,7 @@ fun WeatherHomeScreen(
                 .padding(innerPadding),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            WeatherNavigation(navController, modifier = Modifier.fillMaxSize())
+            WeatherNavigation(navController, snackBarHostState, modifier = Modifier.fillMaxSize())
         }
     }
 }

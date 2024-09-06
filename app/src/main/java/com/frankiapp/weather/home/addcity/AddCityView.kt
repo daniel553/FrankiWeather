@@ -59,6 +59,9 @@ fun AddCityView(
             },
             expanded = expanded,
             onExpandedChange = { expanded = it },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
         ) {
             Column(Modifier.verticalScroll(rememberScrollState())) {
                 repeat(4) { idx ->
@@ -84,10 +87,10 @@ fun AddCityView(
     }
 }
 
-@Preview
+@Preview(widthDp = 420, heightDp = 300)
 @Composable
 private fun PreviewAddCityView() {
     FrankiWeatherTheme {
-        AddCityView(state = AddCityState(), onEvent = {})
+        AddCityView(state = AddCityState(), onEvent = {}, modifier = Modifier.fillMaxWidth())
     }
 }

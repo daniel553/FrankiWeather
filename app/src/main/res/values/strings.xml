@@ -3,4 +3,7 @@
     <string name="home_add_city">Add City</string>
     <string name="home_empty_title">Search for a City</string>
     <string name="add_city_topbar_title">Add a city</string>
+    <string name="add_city_not_found">City not found, try again</string>
+    <string name="add_city_saved">City added succesfully!</string>
+    <string name="add_city_not_saved">Error adding this city, try again!</string>
 </resources>
