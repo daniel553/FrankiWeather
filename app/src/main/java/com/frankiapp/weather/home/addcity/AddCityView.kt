@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -15,6 +16,7 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
@@ -74,6 +76,9 @@ fun AddCityView(
                 .padding(16.dp)
         ) {
             Column(Modifier.verticalScroll(rememberScrollState())) {
+                if(state.searching){
+                    LinearProgressIndicator(modifier = Modifier.fillMaxWidth().height(2.dp))
+                }
                 Text(
                     text = stringResource(id = R.string.add_city_popular_cities),
                     style = MaterialTheme.typography.labelSmall,
@@ -99,6 +104,10 @@ fun AddCityView(
             }
         }
 
+        if(state.searching){
+            LinearProgressIndicator(modifier = Modifier.fillMaxWidth().height(2.dp))
+        }
+
         if (state.city != null) {
             CityToAddView(
                 city = state.city,
@@ -116,7 +125,7 @@ fun AddCityView(
 @Composable
 private fun PreviewAddCityView() {
     FrankiWeatherTheme {
-        AddCityView(state = AddCityState(), onEvent = {}, modifier = Modifier.fillMaxWidth())
+        AddCityView(state = AddCityState(searching = true), onEvent = {}, modifier = Modifier.fillMaxWidth())
     }
 }
 
