@@ -2,7 +2,6 @@ package com.frankiapp.weather.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.frankiapp.domain.weather.FetchWeatherDataForCityUseCase
 import com.frankiapp.domain.weather.SubscribeListOfWeatherDataUseCase
 import com.frankiapp.weather.home.WeatherHomeState.Loading
 import com.frankiapp.weather.home.WeatherHomeState.Success
@@ -20,7 +19,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class WeatherHomeViewModel @Inject constructor(
-    private val fetchWeatherDataForCityUseCase: FetchWeatherDataForCityUseCase,
     private val subscribeListOfWeatherDataUseCase: SubscribeListOfWeatherDataUseCase,
 ) : ViewModel() {
     private val _uiState: MutableStateFlow<WeatherHomeState> =
@@ -37,6 +35,7 @@ class WeatherHomeViewModel @Inject constructor(
     fun onEvent(event: WeatherHomeEvent) {
         when (event) {
             WeatherHomeEvent.Initialize -> handleInitialize()
+            WeatherHomeEvent.OnAddNew -> handleAddNewCity()
         }
     }
 
@@ -49,6 +48,12 @@ class WeatherHomeViewModel @Inject constructor(
                     _uiState.update { state -> (state as Success).copy(cities = list.asWeatherCityList()) }
                 }
             }.stateIn(this)
+        }
+    }
+
+    private fun handleAddNewCity() {
+        viewModelScope.launch {
+            _uiEvent.emit(WeatherHomeUIEvent.OnAdd)
         }
     }
 

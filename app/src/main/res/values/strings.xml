@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Franki Weather</string>
+    <string name="home_add_city">Add City</string>
+    <string name="home_empty_title">Search for a City</string>
 </resources>
