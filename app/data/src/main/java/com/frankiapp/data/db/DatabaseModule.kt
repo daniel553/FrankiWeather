@@ -2,6 +2,7 @@ package com.frankiapp.data.db
 
 import android.content.Context
 import androidx.room.Room
+import com.frankiapp.data.weather.local.WeatherDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

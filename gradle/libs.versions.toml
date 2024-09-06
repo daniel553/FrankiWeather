@@ -20,8 +20,7 @@ coroutines = "1.7.3"
 mockk = "1.13.7"
 webmockserver = "4.12.0"
 okhttp3 = "4.12.0"
-
-
+compose-navigation = "2.8.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -55,6 +54,8 @@ kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 mockk-android = { group = "io.mockk", name = "mockk-android", version.ref = "mockk" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp3" }
 test-webmockserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "webmockserver" }
+compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "compose-navigation" }
+
 
 
 

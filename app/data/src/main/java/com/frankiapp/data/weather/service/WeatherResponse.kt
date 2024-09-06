@@ -80,8 +80,8 @@ fun WeatherResponse.asWeatherEntity(): WeatherEntity {
     return WeatherEntity(
         id = this.id ?: 0,
         cod = this.cod,
-        message = this.message,
-        name = name,
+        message = this.message ?: "",
+        name = name ?: "",
         weather = weather?.map { w ->
             WeatherEntityItem(
                 w.id, w.main, w.description, w.icon

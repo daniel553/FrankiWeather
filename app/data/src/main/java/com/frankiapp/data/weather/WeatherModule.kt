@@ -1,5 +1,6 @@
 package com.frankiapp.data.weather
 
+import com.frankiapp.data.db.Database
 import com.frankiapp.data.weather.local.IWeatherLocalDatasource
 import com.frankiapp.data.weather.local.WeatherLocalDatasource
 import com.frankiapp.data.weather.remote.IWeatherRemoteDataSource
@@ -23,8 +24,13 @@ object WeatherModule {
     @Singleton
     fun provideWeatherService(retrofit: Retrofit): WeatherService =
         retrofit.create(WeatherService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideWeatherDao(db: Database) = db.weatherDao()
 }
 
+@Module
 @InstallIn(SingletonComponent::class)
 abstract class WeatherModuleBinder {
     @Binds
