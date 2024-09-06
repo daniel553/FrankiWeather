@@ -11,7 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.frankiapp.weather.home.WeatherHomeUIEvent
 import com.frankiapp.weather.home.WeatherHomeView
-import com.frankiapp.weather.home.vm.WeatherHomeViewModel
+import com.frankiapp.weather.home.WeatherHomeViewModel
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 
