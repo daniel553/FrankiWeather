@@ -16,8 +16,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Thunderstorm
+import androidx.compose.material.icons.filled.WbCloudy
+import androidx.compose.material.icons.filled.WbSunny
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -28,6 +30,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,13 +40,13 @@ import com.frankiapp.weather.model.WeatherCity
 import com.frankiapp.weather.model.WeatherCityItem
 import com.frankiapp.weather.model.WeatherCityMain
 import com.frankiapp.weather.ui.theme.FrankiWeatherTheme
-import kotlin.math.roundToInt
+import com.frankiapp.weather.util.toFahrenheit
 
 private val sampleCities = (1..3).map {
     WeatherCity(
         name = "Los Angeles $it",
         weather = listOf(WeatherCityItem(main = "Cloudy")),
-        main = WeatherCityMain(55f, 45f, 65f)
+        main = WeatherCityMain(305f, 300f, 310f)
     )
 }
 
@@ -111,7 +114,9 @@ fun WeatherHomeListView(
             Spacer(modifier = Modifier.height(8.dp))
             AddCityButtonView(
                 onClick = { onEvent(WeatherHomeEvent.OnAddNew) },
-                modifier = Modifier.widthIn(128.dp).height(32.dp)
+                modifier = Modifier
+                    .widthIn(128.dp)
+                    .height(32.dp)
             )
         }
     } else {
@@ -172,7 +177,7 @@ fun WeatherCityCard(
             Column(modifier = Modifier.weight(0.6f)) {
                 Text(
                     text = weatherCity.name,
-                    style = MaterialTheme.typography.displaySmall,
+                    style = MaterialTheme.typography.headlineLarge,
                     maxLines = 1,
                     modifier = Modifier
                         .padding(8.dp)
@@ -180,13 +185,13 @@ fun WeatherCityCard(
                 )
                 weatherCity.weather.first()?.let {
                     Text(
-                        text = "Forecast: ${it.main}", modifier = Modifier.padding(8.dp),
+                        text = "Main: ${it.main}", modifier = Modifier.padding(8.dp),
                         style = MaterialTheme.typography.bodyLarge,
                     )
                 }
 
                 Text(
-                    text = "Min: ${weatherCity.main.tempMin.roundToInt()}° - Max: ${weatherCity.main.tempMax.roundToInt()}°",
+                    text = "Min: ${weatherCity.main.tempMin.toFahrenheit()}° - Max: ${weatherCity.main.tempMax.toFahrenheit()}°",
                     modifier = Modifier.padding(8.dp),
                     style = MaterialTheme.typography.bodyMedium,
                 )
@@ -196,16 +201,16 @@ fun WeatherCityCard(
                 modifier = Modifier.weight(0.4f)
             ) {
                 Icon(
-                    imageVector = Icons.Outlined.Star,
+                    imageVector = weatherCity.weatherIcon(),
                     contentDescription = "icon",
                     modifier = Modifier
                         .padding(8.dp)
-                        .size(52.dp)
+                        .size(48.dp)
                 )
                 Text(
-                    text = "${weatherCity.main.temp.roundToInt()}°F",
+                    text = "${weatherCity.main.temp.toFahrenheit()}°F",
                     maxLines = 1,
-                    style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.W700),
+                    style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.W700),
                     modifier = Modifier.padding(
                         top = 8.dp,
                         bottom = 8.dp,
@@ -215,6 +220,16 @@ fun WeatherCityCard(
                 )
             }
         }
+    }
+}
+
+@Composable
+private fun WeatherCity.weatherIcon(): ImageVector {
+    return when {
+        weather.isEmpty() -> Icons.Default.WbSunny
+        weather.first().icon == "01d" -> Icons.Default.WbSunny
+        weather.first().icon == "03n" -> Icons.Default.WbCloudy
+        else -> Icons.Default.Thunderstorm
     }
 }
 
